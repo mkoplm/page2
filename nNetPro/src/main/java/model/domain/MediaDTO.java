@@ -5,4 +5,5 @@ public class MediaDTO {
 	private String mname;
 	private int mcode;
 	private String claskj;
+	private String cladsfsd;
 }
