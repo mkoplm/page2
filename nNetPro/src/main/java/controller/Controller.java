@@ -68,6 +68,5 @@ NnetMediaDAO mediadao = new NnetMediaDAO();
 			FailView.failMsg("수정 실패 다시 시도하세요");
 		}
 	}
-	
 }
 
