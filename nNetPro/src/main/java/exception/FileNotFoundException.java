@@ -1,5 +1,8 @@
 package exception;
 
-public class FileNotFoundException {
-
+public class FileNotFoundException extends Exception{
+	public FileNotFoundException(){}
+	public FileNotFoundException(String message){
+		super(message);
+	}
 }
