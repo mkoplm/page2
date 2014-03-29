@@ -23,6 +23,12 @@ public class CustomerDTO {
 		this.cusMoney = cusMoney;
 		this.mcode = mcode;
 	}
+	
+	public CustomerDTO(String cusId,int cusMoney) {
+		super();
+		this.cusId = cusId;
+		this.cusMoney = cusMoney;
+	}
 
 
 	public String getCusId() {
