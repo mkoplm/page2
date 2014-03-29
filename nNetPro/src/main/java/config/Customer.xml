@@ -12,5 +12,32 @@
 		<result property="custMoney" column="cust_Money"/>
 	</resultMap>
 
+	<sql id="whereCustId"> where cust_Id = #{custId} </sql>
+
+	<select id="selectAllCustomer" resultMap="customerResult">
+		select * from customer
+	</select>
 	
+	<select id="selectCustomerByCustId" parameterType="string" resultMap="customerResult">
+		select *
+		from customer
+		<include refid="whereCustId"/>
+	</select>
+ 
+ 	<insert id="insertCustomer" parameterType="customer">
+		insert into customer (cust_Name, cust_Age, cust_Money)
+		values (#{custName}, #{custAge}, #{custMoney})
+	</insert>
+	
+	<update id="updateCustomer" parameterType="customer">
+		update customer
+		set cust_Money = #{custMoney}
+		<include refid="whereCustId"/>
+	</update>
+	
+	<delete id="deleteAccountById" parameterType="string">
+		delete
+		from customer
+		<include refid="whereCustId"/>
+	</delete>
 </mapper>
