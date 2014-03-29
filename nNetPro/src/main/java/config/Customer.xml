@@ -5,6 +5,12 @@
 
 <mapper namespace="CustomerXml">
 
+	<resultMap id="customerResult" type="customer">
+		<result property="custId" column="cust_Id"/>
+		<result property="custName" column="cust_Name"/>
+		<result property="custAge" column="cust_Age"/>
+		<result property="custMoney" column="cust_Money"/>
+	</resultMap>
 
-
+	
 </mapper>
