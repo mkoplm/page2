@@ -6,11 +6,13 @@ import model.domain.MediaDTO;
 
 import org.apache.ibatis.session.SqlSession;
 
+import exception.DuplicateException;
+import exception.FileNotFoundException;
 import util.DAOFactory;
 
 public class NnetMediaDAO {
 
-	public static void insert(MediaDTO media){
+	public static void insert(MediaDTO media) throws DuplicateException{
 		SqlSession session = DAOFactory.getSqlSession(true);
 		try{
 			session.insert("MediaXml.insertMediaDTO", media);
@@ -19,16 +21,16 @@ public class NnetMediaDAO {
 		}
 	}
 	
-	public static void update(int mcode){
+	public static void update(MediaDTO media) throws DuplicateException{
 		SqlSession session = DAOFactory.getSqlSession(true);
 		try{
-			 session.update("MediaXml.updateMediaDTO", mcode);
+			 session.update("MediaXml.updateMediaDTO", media);
 		}finally{
 			DAOFactory.closeSqlSession(false, session);
 		}
 	}
 	
-	public static void delete(int mcode){
+	public static void delete(int mcode) throws FileNotFoundException{
 		SqlSession session = DAOFactory.getSqlSession(true);
 		try{
 			session.delete("MediaXml.deleteMediaDTOByMcode", mcode);
@@ -37,7 +39,7 @@ public class NnetMediaDAO {
 		}
 	}
 	
-	public static MediaDTO getMedia(int mcode){
+	public static MediaDTO getMedia(int mcode) throws FileNotFoundException{
 		SqlSession session = DAOFactory.getSqlSession();
 		MediaDTO product = null;
 		try{
@@ -48,7 +50,7 @@ public class NnetMediaDAO {
 		return product;
 	}
 	
-	public static ArrayList<MediaDTO> getMediaAll(){
+	public static ArrayList<MediaDTO> getMediaAll() throws FileNotFoundException{
 		SqlSession session = DAOFactory.getSqlSession();
 		ArrayList<MediaDTO> list = null;
 		try{
@@ -58,5 +60,7 @@ public class NnetMediaDAO {
 		}
 		return list;
 	}
+	
+	
 	
 }

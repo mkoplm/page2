@@ -47,9 +47,9 @@ NnetMediaDAO mediadao = new NnetMediaDAO();
 		}
 	}
 	
-	public static void update(int mcode) {
+	public static void update(MediaDTO media) {
 		try {
-			NnetMediaDAO.update(mcode);
+			NnetMediaDAO.update(media);
 				SuccessView.successMsg("수정 성공");
 		} catch(Exception e) {
 			e.printStackTrace();

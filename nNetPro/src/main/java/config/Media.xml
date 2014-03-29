@@ -20,7 +20,7 @@
 		values (#{mcode}, #{mname}, #{msinger}, #{mdownload}, #{mprice}, #{limitage})
 	</insert>
 	
-	<update id="updateMediaDTO" parameterType="int">
+	<update id="updateMediaDTO" resultMap="media">
 		update media
 		set m_name = #{mname}, m_singer = #{msinger},  m_download= #{mdownload}, m_price = #{mprice}, m_linitAge=#{limitage}
 		where m_code = #{mcode}
@@ -34,11 +34,11 @@
 	
 	<select id="selectMediaDTOByMcode" 
 				parameterType="int" 
-				resultType="media">
+				resultMap="media">
 		select * from media where m_code=#{mcode}
 	</select>
 	
-	<select id="selectAllMediaDTO" resultType="media">
+	<select id="selectAllMediaDTO" resultMap="media">
 		select * from media
 	</select>
 
