@@ -1,0 +1,26 @@
+drop table Media;
+
+create table media(
+	m_code number(10) primary key,
+	m_name varchar2(50) not null,
+	m_singer varchar2(50) not null,
+	m_download number,
+	m_price number,
+	m_limitAge number
+);
+
+commit;
+
+drop table customer;
+
+create table customer(
+	cust_Id varchar2(20) primary key,
+	cust_Name varchar2(10) not null,
+	cust_Age number(20) not null,
+	cust_Money number not null,
+	m_code number(10),
+	constraints fk_customer foreign key (m_code) 
+	references media(m_code)
+);
+
+commit;
