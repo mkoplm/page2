@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+	PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-config.dtd">
+	
+<configuration>
+	<properties  resource="config/dbInfo.properties"/>
+	
+	<typeAliases>
+		<typeAlias type="model.domain.MediaDTO" alias="media"/>
+		<typeAlias type="model.domain.CustomerDTO" alias="customer"/>
+	</typeAliases>
+
+	<environments default="env">			
+
+		<environment id="env">
+			<transactionManager type="JDBC" />
+			<dataSource type="POOLED">
+				<property name="driver" value="${driver}" />
+				<property name="url" value="${url}" />
+				<property name="username" value="${id}" />
+				<property name="password" value="${pw}" />
+			</dataSource>
+		</environment>
+
+	</environments>
+
+	<mappers>
+		<mapper resource="config/Customer.xml" />
+		<mapper resource="config/Media.xml" />
+	</mappers>
+
+</configuration>
