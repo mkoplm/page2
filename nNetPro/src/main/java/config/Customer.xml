@@ -6,13 +6,12 @@
 <mapper namespace="CustomerXml">
 
 	<resultMap id="customerResult" type="customer">
-		<result property="cusId" column="cus_Id"/>
-		<result property="cusName" column="cus_Name"/>
-		<result property="cusAge" column="cus_Age"/>
-		<result property="cusMoney" column="cus_Money"/>
+		<result property="cusId" column="cust_Id"/>
+		<result property="cusName" column="cust_Name"/>
+		<result property="cusAge" column="cust_Age"/>
+		<result property="cusMoney" column="cust_Money"/>
+		<result property="mcode" column="m_code"/>
 	</resultMap>
-
-	<sql id="whereCustId"> where cus_Id = #{cusId} </sql>
 
 	<select id="selectAllCustomer" resultMap="customerResult">
 		select * from customer
@@ -21,23 +20,23 @@
 	<select id="selectCustomerByCusId" parameterType="string" resultMap="customerResult">
 		select *
 		from customer
-		<include refid="whereCusId"/>
+		where cust_Id = #{cusId}
 	</select>
  
  	<insert id="insertCustomer" parameterType="customer">
-		insert into customer (cus_Name, cus_Age, cus_Money)
-		values (#{cusName}, #{cusAge}, #{cusMoney})
+		insert into customer (cust_Id, cust_Name, cust_Age, cust_Money)
+		values (#{cusId}, #{cusName}, #{cusAge}, #{cusMoney})
 	</insert>
 	
 	<update id="updateCustomer" parameterType="customer">
 		update customer
 		set cus_Money = cus_Money-#{cusMoney}
-		<include refid="whereCusId"/>
+		where cust_Id = #{cusId}
 	</update>
 	
 	<delete id="deleteCustomerByCusId" parameterType="string">
 		delete
 		from customer
-		<include refid="whereCusId"/>
+		where cust_Id = #{cusId}
 	</delete>
 </mapper>

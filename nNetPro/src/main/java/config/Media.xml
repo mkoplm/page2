@@ -5,7 +5,7 @@
 
 <mapper namespace="MediaXml">
 
-	<resultMap id="MediaDTOResult" type=media>
+	<resultMap id="MediaDTOResult" type="media" >
 		<result property="mcode" column="m_code" />
 		<result property="mname" column="m_name" />
 		<result property="msinger" column="m_singer" />
@@ -20,7 +20,7 @@
 		values (#{mcode}, #{mname}, #{msinger}, #{mdownload}, #{mprice}, #{limitage})
 	</insert>
 	
-	<update id="updateMediaDTO" resultMap="media">
+	<update id="updateMediaDTO" parameterType="media">
 		update media
 		set m_name = #{mname}, m_singer = #{msinger},  m_download= #{mdownload}, m_price = #{mprice}, m_limitAge=#{limitage}
 		where m_code = #{mcode}
@@ -34,11 +34,11 @@
 	
 	<select id="selectMediaDTOByMcode" 
 				parameterType="int" 
-				resultMap="media">
+				resultMap="MediaDTOResult">
 		select * from media where m_code=#{mcode}
 	</select>
 	
-	<select id="selectAllMediaDTO" resultMap="media">
+	<select id="selectAllMediaDTO" resultMap="MediaDTOResult">
 		select * from media
 	</select>
 
