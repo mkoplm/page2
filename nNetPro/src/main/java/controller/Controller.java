@@ -1,6 +1,8 @@
 package controller;
 
+import model.dao.NnetCustomerDAO;
 import model.dao.NnetMediaDAO;
+import model.domain.CustomerDTO;
 import model.domain.MediaDTO;
 import view.FailView;
 import view.SuccessView;
@@ -16,6 +18,16 @@ NnetMediaDAO mediadao = new NnetMediaDAO();
 		} catch (Exception e) {
 			e.printStackTrace();
 			FailView.failMsg("추가 실패");
+		}
+	}
+	
+	public static void insert(CustomerDTO customer) {
+		try {
+			NnetCustomerDAO.insert(customer);
+				SuccessView.successMsg("회원가입이 완료되었습니다.");
+		} catch (Exception e) {
+			e.printStackTrace();
+			FailView.failMsg("회원가입 실패");
 		}
 	}
 	
