@@ -11,7 +11,7 @@
 		<result property="msinger" column="m_singer" />
 		<result property="mdownload" column="m_download" />
 		<result property="mprice" column="m_price" />
-		<result property="limitage" column="m_linitAge" />
+		<result property="limitage" column="m_limitAge" />
 	</resultMap>
 
 	
@@ -22,7 +22,7 @@
 	
 	<update id="updateMediaDTO" resultMap="media">
 		update media
-		set m_name = #{mname}, m_singer = #{msinger},  m_download= #{mdownload}, m_price = #{mprice}, m_linitAge=#{limitage}
+		set m_name = #{mname}, m_singer = #{msinger},  m_download= #{mdownload}, m_price = #{mprice}, m_limitAge=#{limitage}
 		where m_code = #{mcode}
 	</update>
 	
