@@ -52,9 +52,8 @@ public class MainView {
 		Controller.getCustomer("custemer02");
 		Controller.getMedia(1002);
 		
-		
-		
-		
-		
+		System.out.println("******************** 음원 정보 삭제 후 조회(1001) ********************");
+		Controller.delete(1001);
+		Controller.getMediaAll();
 	}
 }
