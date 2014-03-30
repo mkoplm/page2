@@ -30,6 +30,15 @@ public class NnetMediaDAO {
 		}
 	}
 	
+	public static boolean sellMedia(int mcode) throws DuplicateException{
+		SqlSession session = DAOFactory.getSqlSession(true);
+		try{
+			 return (session.update("MediaXml.sellMedia", mcode) >=1)?true:false;
+		}finally{
+			DAOFactory.closeSqlSession(false, session);
+		}
+	}
+	
 	public static void delete(int mcode) throws FileNotFoundException{
 		SqlSession session = DAOFactory.getSqlSession(true);
 		try{
@@ -61,6 +70,13 @@ public class NnetMediaDAO {
 		return list;
 	}
 	
-	
+	public static boolean deleteAll() {
+		SqlSession session = DAOFactory.getSqlSession(true);
+		try {
+			return (session.delete("MediaXml.deleteAllMedia") >= 1) ? true:false;
+		} finally{
+			session.close();
+		}
+	}
 	
 }

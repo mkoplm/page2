@@ -24,6 +24,13 @@ public class CustomerDTO {
 		this.mcode = mcode;
 	}
 	
+	public CustomerDTO(String cusId,int cusMoney, int mcode) {
+		super();
+		this.cusId = cusId;
+		this.cusMoney = cusMoney;
+		this.mcode = mcode;
+	}
+	
 	public CustomerDTO(String cusId,int cusMoney) {
 		super();
 		this.cusId = cusId;
@@ -84,17 +91,15 @@ public class CustomerDTO {
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
-		builder.append("CustomerDTO [cusId=");
 		builder.append(cusId);
-		builder.append(", cusName=");
+		builder.append("\t| ");
 		builder.append(cusName);
-		builder.append(", cusAge=");
+		builder.append("\t| ");
 		builder.append(cusAge);
-		builder.append(", cusMoney=");
+		builder.append("\t| ");
 		builder.append(cusMoney);
-		builder.append(", mcode=");
+		builder.append("\t| ");
 		builder.append(mcode);
-		builder.append("]");
 		return builder.toString();
 	}
 	

@@ -76,19 +76,17 @@ public class MediaDTO {
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
-		builder.append("MediaDTO [mcode=");
 		builder.append(mcode);
-		builder.append(", mname=");
+		builder.append("\t| ");
 		builder.append(mname);
-		builder.append(", msinger=");
+		builder.append("\t| ");
 		builder.append(msinger);
-		builder.append(", mdownload=");
+		builder.append("\t| ");
 		builder.append(mdownload);
-		builder.append(", mprice=");
+		builder.append("\t| ");
 		builder.append(mprice);
-		builder.append(", limitage=");
+		builder.append("\t| ");
 		builder.append(limitage);
-		builder.append("]");
 		return builder.toString();
 	}
 	

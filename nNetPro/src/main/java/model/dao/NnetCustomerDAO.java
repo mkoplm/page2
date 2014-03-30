@@ -49,10 +49,31 @@ public class NnetCustomerDAO {
 		}
 	}
 	
+	public static void buyMedia(String cusId, int cusMoney, int mcode) throws Exception {
+		SqlSession session = DAOFactory.getSqlSession(true);
+		CustomerDTO customer = new CustomerDTO(cusId, cusMoney, mcode);
+		try {
+			session.update("CustomerXml.buyMedia", customer);
+			customer = session.selectOne("CustomerXml.selectCustomerByCusId", cusId);
+			NnetMediaDAO.sellMedia(customer.getMcode());
+		} finally{
+			session.close();
+		}
+	}
+	
 	public static boolean delete(String cusId) throws Exception {
 		SqlSession session = DAOFactory.getSqlSession(true);
 		try {
 			return (session.delete("CustomerXml.deleteCustomerByCusId", new Integer(cusId)) >= 1) ? true:false;
+		} finally{
+			session.close();
+		}
+	}
+	
+	public static boolean deleteAll() throws Exception {
+		SqlSession session = DAOFactory.getSqlSession(true);
+		try {
+			return (session.delete("CustomerXml.deleteCustomer") >= 1) ? true:false;
 		} finally{
 			session.close();
 		}

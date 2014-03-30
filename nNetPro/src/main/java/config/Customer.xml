@@ -30,7 +30,13 @@
 	
 	<update id="updateCustomer" parameterType="customer">
 		update customer
-		set cus_Money = cus_Money-#{cusMoney}
+		set cust_Money = cust_Money+#{cusMoney}
+		where cust_Id = #{cusId}
+	</update>
+	
+	<update id="buyMedia" parameterType="customer">
+		update customer
+		set cust_Money = cust_Money-#{cusMoney}, m_code = #{mcode}
 		where cust_Id = #{cusId}
 	</update>
 	
@@ -38,5 +44,10 @@
 		delete
 		from customer
 		where cust_Id = #{cusId}
+	</delete>
+	
+	<delete id="deleteCustomer">
+		delete
+		from customer
 	</delete>
 </mapper>

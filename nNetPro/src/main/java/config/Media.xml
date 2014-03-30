@@ -26,20 +26,29 @@
 		where m_code = #{mcode}
 	</update>
 	
+	<update id="sellMedia" parameterType="int">
+		update media
+		set m_download= m_download+1
+		where m_code = #{mcode}
+	</update>
+	
 	<delete id="deleteMediaDTOByMcode" parameterType="int">
 		delete
 		from media
 		where m_code = #{mcode}
 	</delete>
 	
-	<select id="selectMediaDTOByMcode" 
-				parameterType="int" 
-				resultMap="MediaDTOResult">
+	<select id="selectMediaDTOByMcode" parameterType="int" resultMap="MediaDTOResult">
 		select * from media where m_code=#{mcode}
 	</select>
 	
 	<select id="selectAllMediaDTO" resultMap="MediaDTOResult">
 		select * from media
 	</select>
+
+	<delete id="deleteAllMedia">
+		delete
+		from media
+	</delete>
 
 </mapper>
