@@ -61,6 +61,24 @@ public class NnetMediaDAO {
 		return list;
 	}
 	
+	public static void deleteAllMedia(){
+		SqlSession session = DAOFactory.getSqlSession(true);
+		try{
+			session.delete("MediaXml.deleteAllMedia");
+		}finally{
+			DAOFactory.closeSqlSession(false, session);
+		}
+	}
 	
+	public static void updateDownload(){
+		SqlSession session = DAOFactory.getSqlSession(true);
+		try{
+			session.update("MediaXml.updateDownload");
+		}finally{
+			DAOFactory.closeSqlSession(false, session);
+		}
+	}
+	
+
 	
 }

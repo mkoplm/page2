@@ -13,6 +13,10 @@ public class MediaDTO {
 		super();
 		// TODO Auto-generated constructor stub
 	}
+	public MediaDTO(int mdownload) {
+		super();
+		this.mdownload = mdownload;
+	}
 
 	public MediaDTO(int mcode, String mname, String msinger, int mdownload,
 			int mprice, int limitage) {

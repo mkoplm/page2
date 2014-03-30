@@ -41,5 +41,15 @@
 	<select id="selectAllMediaDTO" resultMap="MediaDTOResult">
 		select * from media
 	</select>
+	
+	<update id="updateDownload" >
+		update media set m_download = m_download+1
+	</update>
+	
+	
+	<delete id="deleteAllMedia">
+		delete
+		from media
+	</delete>
 
 </mapper>

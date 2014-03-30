@@ -10,8 +10,20 @@
 		<result property="cusName" column="cust_Name"/>
 		<result property="cusAge" column="cust_Age"/>
 		<result property="cusMoney" column="cust_Money"/>
+<<<<<<< HEAD
+=======
 		<result property="mcode" column="m_code"/>
+>>>>>>> branch 'master' of https://github.com/mkoplm/page2.git
 	</resultMap>
+<<<<<<< HEAD
+
+<!--  
+	<sql id="whereCustId"> where cus_Id = #{cusId} </sql>
+	
+-->
+
+=======
+>>>>>>> branch 'master' of https://github.com/mkoplm/page2.git
 
 	<select id="selectAllCustomer" resultMap="customerResult">
 		select * from customer
@@ -20,7 +32,13 @@
 	<select id="selectCustomerByCusId" parameterType="string" resultMap="customerResult">
 		select *
 		from customer
+<<<<<<< HEAD
+		<!-- 
+		<include refid="whereCustId"/>
+		 -->
+=======
 		where cust_Id = #{cusId}
+>>>>>>> branch 'master' of https://github.com/mkoplm/page2.git
 	</select>
  
  	<insert id="insertCustomer" parameterType="customer">
@@ -31,12 +49,29 @@
 	<update id="updateCustomer" parameterType="customer">
 		update customer
 		set cus_Money = cus_Money-#{cusMoney}
+<<<<<<< HEAD
+		<!-- 
+		<include refid="whereCustId"/>
+		 -->
+=======
 		where cust_Id = #{cusId}
+>>>>>>> branch 'master' of https://github.com/mkoplm/page2.git
 	</update>
 	
 	<delete id="deleteCustomerByCusId" parameterType="string">
 		delete
 		from customer
+<<<<<<< HEAD
+		<!-- 
+		<include refid="whereCustId"/>
+		 -->
+=======
 		where cust_Id = #{cusId}
+>>>>>>> branch 'master' of https://github.com/mkoplm/page2.git
+	</delete>
+	
+	<delete id="deleteAllCustomer">
+		delete
+		from customer
 	</delete>
 </mapper>

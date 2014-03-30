@@ -58,4 +58,14 @@ public class NnetCustomerDAO {
 		}
 	}
 	
+	public static boolean deleteAllCust(){
+		SqlSession session = DAOFactory.getSqlSession(true);
+		try{
+			return (session.delete("deleteAllCustomer") >= 1) ? true:false;
+		}finally{
+			session.close();
+		}
+	}
+	
+	
 }
