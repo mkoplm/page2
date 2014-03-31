@@ -17,7 +17,7 @@ public class CustomerController {
 			cust.insert(customer);
 				SuccessView.successMsg("회원가입이 완료되었습니다.");
 		} catch (DuplicateException e){
-			new DuplicateException("중복되는 아이디 입니다.");
+			FailView.failMsg("중복되는 아이디 입니다.");
 		} catch (Exception e) {
 			e.printStackTrace();
 			FailView.failMsg("회원가입 실패");
@@ -37,7 +37,7 @@ public class CustomerController {
 		try {
 			SuccessView.printCustomer(cust.selectCustomerByCustId(cusId));
 		} catch (FileNotFoundException f){
-			new FileNotFoundException("고객정보가 존재하지 않습니다.");
+			FailView.failMsg("고객정보가 존재하지 않습니다.");
 		} catch (Exception e) {
 			e.printStackTrace();
 			FailView.failMsg("검색 실패");
@@ -49,7 +49,7 @@ public class CustomerController {
 			cust.updateCustomer(cusId, cusMoney);
 			SuccessView.successMsg("고객정보 수정 완료");
 		} catch (FileNotFoundException f){
-			new FileNotFoundException("음원이 존재하지 않습니다.");
+			FailView.failMsg("고객정보가 존재하지 않습니다.");
 		} catch(Exception e) {
 			e.printStackTrace();
 			FailView.failMsg("수정 실패. 관리자에게 문의하세요.");
@@ -61,7 +61,7 @@ public class CustomerController {
 			cust.buyMedia(cusId, cusMoney, mcode);
 			SuccessView.successMsg("구매 완료");
 		} catch (FileNotFoundException f){
-			new FileNotFoundException("음원이 존재하지 않습니다.");
+			FailView.failMsg("음원이 존재하지 않습니다.");
 		} catch(Exception e) {
 			e.printStackTrace();
 			FailView.failMsg("구매 실패 다시 시도하세요");
@@ -71,7 +71,7 @@ public class CustomerController {
 	public static void deleteAll() {
 		try {
 			cust.deleteAll();
-			SuccessView.successMsg("삭제 성공");
+			SuccessView.successMsg("음원정보 삭제 성공");
 		} catch (Exception e) {
 			e.printStackTrace();
 			FailView.failMsg("삭제 실패 다시 시도하세요");

@@ -17,7 +17,7 @@ public class MainView {
 	}
 	
 	public static void main(String[] args) {
-		getPrint("음원 구매");
+		getPrint("기존 데이터 삭제");
 		CustomerController.deleteAll();
 		MediaController.deleteAll();
 		System.out.println();
@@ -63,14 +63,15 @@ public class MainView {
 		
 		getPrint("음원 구매");
 		CustomerController.buyMedia("custemer02", 300, 1002);
-		getPrint("음원 구매 후 고객정보 및 음원정보 조회");
+		getPrint("고객정보 및 음원정보 조회");
 		CustomerController.getCustomer("custemer02");
 		MediaController.getMedia(1002);
 		System.out.println();
 		
-		getPrint("음원 정보 삭제 후 조회(1001)");
+		getPrint("음원 정보 삭제(1001)");
 		MediaController.delete(1001);
-		MediaController.getMediaAll();
+		getPrint("음원 정보 조회(1001)");
+		MediaController.getMedia(1001);
 		System.out.println();
 	}
 }

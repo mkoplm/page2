@@ -18,7 +18,7 @@ public class NnetMediaDAO {
 		}
 		SqlSession session = DAOFactory.getSqlSession(true);
 		try{
-			session.insert("MediaXml.insertMediaDTO", media);
+			session.insert("MediaXml.insertMedia", media);
 		}finally{
 			DAOFactory.closeSqlSession(false, session);
 		}
@@ -30,7 +30,7 @@ public class NnetMediaDAO {
 		}
 		SqlSession session = DAOFactory.getSqlSession(true);
 		try{
-			 session.update("MediaXml.updateMediaDTO", media);
+			 session.update("MediaXml.updateMedia", media);
 		}finally{
 			DAOFactory.closeSqlSession(false, session);
 		}
@@ -54,7 +54,7 @@ public class NnetMediaDAO {
 		}
 		SqlSession session = DAOFactory.getSqlSession(true);
 		try{
-			session.delete("MediaXml.deleteMediaDTOByMcode", mcode);
+			session.delete("MediaXml.deleteMediaByMcode", mcode);
 		}finally{
 			DAOFactory.closeSqlSession(false, session);
 		}
@@ -67,7 +67,7 @@ public class NnetMediaDAO {
 		SqlSession session = DAOFactory.getSqlSession();
 		MediaDTO product = null;
 		try{
-			product = session.selectOne("MediaXml.selectMediaDTOByMcode", mcode);
+			product = session.selectOne("MediaXml.selectMediaByMcode", mcode);
 		}finally{
 			DAOFactory.closeSqlSession(session);
 		}
@@ -78,7 +78,7 @@ public class NnetMediaDAO {
 		SqlSession session = DAOFactory.getSqlSession();
 		ArrayList<MediaDTO> list = null;
 		try{
-			list = (ArrayList)session.selectList("MediaXml.selectAllMediaDTO");
+			list = (ArrayList)session.selectList("MediaXml.selectAllMedia");
 		}finally{
 			DAOFactory.closeSqlSession(session);
 		}
@@ -97,7 +97,7 @@ public class NnetMediaDAO {
 	private static boolean isExist(int mcode){
 		SqlSession session = DAOFactory.getSqlSession();
 		try{
-			return (session.selectOne("MediaXml.selectMediaDTOByMcode", mcode) != null)?true:false;
+			return (session.selectOne("MediaXml.selectMediaByMcode", mcode) != null)?true:false;
 		} finally {
 			session.close();
 		}

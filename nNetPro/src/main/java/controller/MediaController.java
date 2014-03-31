@@ -15,7 +15,7 @@ public class MediaController {
 			manager.insert(media);
 			SuccessView.successMsg("음악이 추가되었습니다.");
 		} catch (DuplicateException e){
-			new DuplicateException("중복되는 음원번호입니다.");
+			FailView.failMsg("중복되는 음원번호입니다.");
 		} catch (Exception e) {
 			e.printStackTrace();
 			FailView.failMsg("추가 실패");
@@ -35,7 +35,7 @@ public class MediaController {
 		try {
 			SuccessView.printMedia(manager.getMedia(mcode));
 		} catch (FileNotFoundException f){
-			new FileNotFoundException("음원이 존재하지 않습니다.");
+			FailView.failMsg("음원이 존재하지 않습니다.");
 		} catch (Exception e) {
 			e.printStackTrace();
 			FailView.failMsg("검색 실패");
@@ -47,7 +47,7 @@ public class MediaController {
 			manager.delete(mcode);
 			SuccessView.successMsg("삭제 성공");
 		} catch (FileNotFoundException f){
-			new FileNotFoundException("음원이 존재하지 않습니다.");
+			FailView.failMsg("음원이 존재하지 않습니다.");
 		} catch (Exception e) {
 			e.printStackTrace();
 			FailView.failMsg("삭제 실패 다시 시도하세요.");
@@ -59,8 +59,9 @@ public class MediaController {
 			manager.update(media);
 			SuccessView.successMsg("수정 성공");
 		} catch (FileNotFoundException f){
-			new FileNotFoundException("음원이 존재하지 않습니다.");
+			FailView.failMsg("음원이 존재하지 않습니다.");
 		} catch (Exception e) {
+			e.printStackTrace();
 			FailView.failMsg("수정 실패 다시 시도하세요");
 		}
 	}
@@ -68,7 +69,7 @@ public class MediaController {
 	public static void deleteAll() {
 		try {
 			manager.deleteAll();
-			SuccessView.successMsg("삭제 성공");
+			SuccessView.successMsg("고객정보 삭제 성공");
 		} catch (Exception e) {
 			e.printStackTrace();
 			FailView.failMsg("삭제 실패 다시 시도하세요");
