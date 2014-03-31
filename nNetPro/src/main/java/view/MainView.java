@@ -6,12 +6,16 @@ import model.domain.MediaDTO;
 
 public class MainView {
 	
+	private static void getPrint(String message){
+		System.out.println("*********************** " + message + " ***********************");
+	}
+	
 	public static void main(String[] args) {
 		
-		System.out.println("*** 이전 테이블 내용 삭제");
+		getPrint("이전 테이블 내용 삭제");
 		Controller.deleteAll();
 		
-		System.out.println("********************** 테이블 추가 **********************");
+		getPrint("테이블 추가");
 		Controller.insert(new MediaDTO(1000,"야생화","박효신",1,500,19));
 		Controller.insert(new MediaDTO(1001,"그런 남자","Bro",1,300,19));
 		Controller.insert(new MediaDTO(1002,"썸(Feat.릴보이 Of 긱스)","소유,정기고",1,600,19));
@@ -34,25 +38,25 @@ public class MainView {
 //		Controller.insert(new CustomerDTO("custemer08","여인률",27,5000,2008));
 //		Controller.insert(new CustomerDTO("custemer09","유병찬",27,1000,2009));
 		 
-		System.out.println("********************** 전체목록 조회 **********************");
+		getPrint("전체목록 조회");
 		Controller.getMediaAll();
 		System.out.println();
 		Controller.selectAllCustomer();
 		
-		System.out.println("**************** 고객 정보 조회(custemer02) *****************");
+		getPrint("고객 정보 조회(custemer02)");
 		Controller.getCustomer("custemer02");
 		
-		System.out.println("**************** 고객 정보 변경(custemer02) / 검색 *****************");
+		getPrint("고객 정보 변경(custemer02) / 검색");
 		Controller.updateCustomer("custemer02", 300000);
 		Controller.getCustomer("custemer02");
 		
-		System.out.println("************************ 음원 구매 ************************");
+		getPrint("음원 구매");
 		Controller.buyMedia("custemer02", 300, 1002);
-		System.out.println("**************** 음원 구매 후 고객정보 및 음원정보 조회 ***************");
+		getPrint("음원 구매 후 고객정보 및 음원정보 조회");
 		Controller.getCustomer("custemer02");
 		Controller.getMedia(1002);
 		
-		System.out.println("******************** 음원 정보 삭제 후 조회(1001) ********************");
+		getPrint("음원 정보 삭제 후 조회(1001)");
 		Controller.delete(1001);
 		Controller.getMediaAll();
 	}

@@ -1,8 +1,11 @@
 package model.dao;
 
 import java.util.ArrayList;
+
 import org.apache.ibatis.session.SqlSession;
 
+import exception.DuplicateException;
+import exception.FileNotFoundException;
 import model.domain.CustomerDTO;
 import util.DAOFactory;
 
@@ -19,7 +22,10 @@ public class NnetCustomerDAO {
 		return selectAll;
 	}
 	
-	public static CustomerDTO selectCustomerByCustId(String cusId) throws Exception {
+	public static CustomerDTO selectCustomerByCustId(String cusId) throws FileNotFoundException {
+		if(!isExist(cusId)){
+			new FileNotFoundException();
+		}
 		SqlSession session = DAOFactory.getSqlSession();
 		CustomerDTO customer = null;
 		try {
@@ -30,26 +36,35 @@ public class NnetCustomerDAO {
 		return customer;
 	}
 	
-	public static boolean insert(CustomerDTO customer) throws Exception {
+	public static boolean insert(CustomerDTO customer) throws DuplicateException {
+		if(isExist(customer.getCusId())){
+			throw new DuplicateException();
+		}
 		SqlSession session = DAOFactory.getSqlSession(true);
 		try {
 			return (session.insert("CustomerXml.insertCustomer", customer) >= 1)? true:false;
 		} finally{
-			session.close();			
+			DAOFactory.closeSqlSession(false, session);			
 		}
 	}
 	
-	public static boolean updateCustomer(String cusId, int cusMoney) throws Exception {
+	public static boolean updateCustomer(String cusId, int cusMoney) throws FileNotFoundException {
+		if(!isExist(cusId)){
+			new FileNotFoundException();
+		}
 		SqlSession session = DAOFactory.getSqlSession(true);
 		CustomerDTO customer = new CustomerDTO(cusId, cusMoney);
 		try {
 			return  (session.update("CustomerXml.updateCustomer", customer) >= 1) ? true:false;
 		} finally{
-			session.close();			
+			DAOFactory.closeSqlSession(false, session);			
 		}
 	}
 	
-	public static void buyMedia(String cusId, int cusMoney, int mcode) throws Exception {
+	public static void buyMedia(String cusId, int cusMoney, int mcode) throws FileNotFoundException {
+		if(!isExist(cusId)){
+			new FileNotFoundException();
+		}
 		SqlSession session = DAOFactory.getSqlSession(true);
 		CustomerDTO customer = new CustomerDTO(cusId, cusMoney, mcode);
 		try {
@@ -57,16 +72,19 @@ public class NnetCustomerDAO {
 			customer = session.selectOne("CustomerXml.selectCustomerByCusId", cusId);
 			NnetMediaDAO.sellMedia(customer.getMcode());
 		} finally{
-			session.close();
+			DAOFactory.closeSqlSession(false, session);
 		}
 	}
 	
-	public static boolean delete(String cusId) throws Exception {
+	public static boolean delete(String cusId) throws FileNotFoundException {
+		if(!isExist(cusId)){
+			new FileNotFoundException();
+		}
 		SqlSession session = DAOFactory.getSqlSession(true);
 		try {
 			return (session.delete("CustomerXml.deleteCustomerByCusId", new Integer(cusId)) >= 1) ? true:false;
 		} finally{
-			session.close();
+			DAOFactory.closeSqlSession(false, session);
 		}
 	}
 	
@@ -79,4 +97,12 @@ public class NnetCustomerDAO {
 		}
 	}
 	
+	private static boolean isExist (String cusId) {
+		SqlSession session = DAOFactory.getSqlSession();
+		try {
+			return (session.selectOne("CustomerXml.selectCustomerByCusId", cusId) != null )?true:false;
+		} finally {
+			session.close();
+		}
+	}
 }

@@ -13,6 +13,9 @@ import util.DAOFactory;
 public class NnetMediaDAO {
 
 	public static void insert(MediaDTO media) throws DuplicateException{
+		if(isExist(media.getMcode())){
+			throw new DuplicateException();
+		}
 		SqlSession session = DAOFactory.getSqlSession(true);
 		try{
 			session.insert("MediaXml.insertMediaDTO", media);
@@ -21,7 +24,10 @@ public class NnetMediaDAO {
 		}
 	}
 	
-	public static void update(MediaDTO media) throws DuplicateException{
+	public static void update (MediaDTO media) throws FileNotFoundException{
+		if(!isExist(media.getMcode())){
+			throw new FileNotFoundException();
+		}
 		SqlSession session = DAOFactory.getSqlSession(true);
 		try{
 			 session.update("MediaXml.updateMediaDTO", media);
@@ -30,7 +36,10 @@ public class NnetMediaDAO {
 		}
 	}
 	
-	public static boolean sellMedia(int mcode) throws DuplicateException{
+	public static boolean sellMedia(int mcode) throws FileNotFoundException{
+		if(!isExist(mcode)){
+			throw new FileNotFoundException();
+		}
 		SqlSession session = DAOFactory.getSqlSession(true);
 		try{
 			 return (session.update("MediaXml.sellMedia", mcode) >=1)?true:false;
@@ -40,6 +49,9 @@ public class NnetMediaDAO {
 	}
 	
 	public static void delete(int mcode) throws FileNotFoundException{
+		if(!isExist(mcode)){
+			throw new FileNotFoundException();
+		}
 		SqlSession session = DAOFactory.getSqlSession(true);
 		try{
 			session.delete("MediaXml.deleteMediaDTOByMcode", mcode);
@@ -49,6 +61,9 @@ public class NnetMediaDAO {
 	}
 	
 	public static MediaDTO getMedia(int mcode) throws FileNotFoundException{
+		if(!isExist(mcode)){
+			throw new FileNotFoundException();
+		}
 		SqlSession session = DAOFactory.getSqlSession();
 		MediaDTO product = null;
 		try{
@@ -79,4 +94,12 @@ public class NnetMediaDAO {
 		}
 	}
 	
+	private static boolean isExist(int mcode){
+		SqlSession session = DAOFactory.getSqlSession();
+		try{
+			return (session.selectOne("MediaXml.selectMediaDTOByMcode", mcode) != null)?true:false;
+		} finally {
+			session.close();
+		}
+	}
 }
