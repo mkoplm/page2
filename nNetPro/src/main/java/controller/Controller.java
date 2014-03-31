@@ -1,5 +1,7 @@
 package controller;
 
+import exception.DuplicateException;
+import exception.FileNotFoundException;
 import model.dao.NnetCustomerDAO;
 import model.dao.NnetMediaDAO;
 import model.domain.CustomerDTO;
@@ -9,13 +11,15 @@ import view.SuccessView;
 
 public class Controller {
 	
-	NnetMediaDAO mediadao = new NnetMediaDAO();
 	
 	public static void insert (MediaDTO media) {
 		try {
 			NnetMediaDAO.insert(media);
 			SuccessView.successMsg("음악이 추가되었습니다.");
-		} catch (Exception e) {
+		} catch (DuplicateException e) {
+			e.printStackTrace();
+			FailView.failMsg("추가 실패");
+		}catch (Exception e) {
 			e.printStackTrace();
 			FailView.failMsg("추가 실패");
 		}
@@ -25,7 +29,10 @@ public class Controller {
 		try {
 			NnetCustomerDAO.insert(customer);
 				SuccessView.successMsg("회원가입이 완료되었습니다.");
-		} catch (Exception e) {
+		} catch (DuplicateException e) {
+			e.printStackTrace();
+			FailView.failMsg("회원가입 실패");
+		}catch (Exception e) {
 			e.printStackTrace();
 			FailView.failMsg("회원가입 실패");
 		}
@@ -34,7 +41,10 @@ public class Controller {
 	public static void getMediaAll () {
 		try {
 			SuccessView.printAllMedia(NnetMediaDAO.getMediaAll());
-		} catch (Exception e) {
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+			FailView.failMsg("모든 검색 실패");
+		}catch (Exception e) {
 			e.printStackTrace();
 			FailView.failMsg("모든 검색 실패");
 		}
@@ -43,7 +53,10 @@ public class Controller {
 	public static void selectAllCustomer () {
 		try {
 			SuccessView.printAllCustomer(NnetCustomerDAO.selectAllCustomer());
-		} catch (Exception e) {
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+			FailView.failMsg("모든 검색 실패");
+		}catch (Exception e) {
 			e.printStackTrace();
 			FailView.failMsg("모든 검색 실패");
 		}
@@ -52,7 +65,10 @@ public class Controller {
 	public static void getMedia (int mcode) {
 		try {
 			SuccessView.printMedia(NnetMediaDAO.getMedia(mcode));
-		} catch (Exception e) {
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+			FailView.failMsg("검색 실패");
+		}catch (Exception e) {
 			e.printStackTrace();
 			FailView.failMsg("검색 실패");
 		}
@@ -81,7 +97,10 @@ public class Controller {
 		try {
 			NnetMediaDAO.update(media);
 			SuccessView.successMsg("수정 성공");
-		} catch(Exception e) {
+		} catch(DuplicateException e) {
+			e.printStackTrace();
+			FailView.failMsg("수정 실패 다시 시도하세요");
+		}catch(Exception e) {
 			e.printStackTrace();
 			FailView.failMsg("수정 실패 다시 시도하세요");
 		}

@@ -1,14 +1,16 @@
 package model.dao;
 
 import java.util.ArrayList;
+
 import org.apache.ibatis.session.SqlSession;
 
+import exception.FileNotFoundException;
 import model.domain.CustomerDTO;
 import util.DAOFactory;
 
 public class NnetCustomerDAO {
 	
-	public static ArrayList<CustomerDTO> selectAllCustomer() throws Exception {
+	public static ArrayList<CustomerDTO> selectAllCustomer() throws FileNotFoundException {
 		SqlSession session = DAOFactory.getSqlSession();
 		ArrayList<CustomerDTO> selectAll = null;
 		try {
