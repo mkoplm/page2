@@ -57,13 +57,13 @@ public class MainView {
 		System.out.println();
 		
 		getPrint("고객 정보 변경(custemer02) / 검색");
-		CustomerController.updateCustomer("custemer02", 300000);
+		CustomerController.updateCustomer("custemer02", 30000);
 		CustomerController.getCustomer("custemer02");
 		System.out.println();
 		
 		getPrint("음원 구매");
-		CustomerController.buyMedia("custemer02", 300, 1002);
-		getPrint("고객정보 및 음원정보 조회");
+		CustomerController.buyMedia("custemer02", 1002);
+		getPrint("구매 후 고객정보 및 음원정보 조회");
 		CustomerController.getCustomer("custemer02");
 		MediaController.getMedia(1002);
 		System.out.println();

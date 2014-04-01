@@ -26,8 +26,8 @@ public class CustomerManagementImpl implements CustomerManagemetIF{
 	public  boolean updateCustomer(String cusId, int cusMoney) throws FileNotFoundException {
 		return NnetCustomerDAO.updateCustomer(cusId, cusMoney);
 	}
-	public  void buyMedia(String cusId, int cusMoney, int mcode) throws FileNotFoundException{
-		NnetCustomerDAO.buyMedia(cusId, cusMoney, mcode);
+	public  void buyMedia(String cusId, int mcode) throws FileNotFoundException{
+		NnetCustomerDAO.buyMedia(cusId, mcode);
 	}
 	public  boolean delete(String cusId) throws FileNotFoundException{
 		return NnetCustomerDAO.delete(cusId);

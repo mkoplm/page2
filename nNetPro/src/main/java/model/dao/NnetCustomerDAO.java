@@ -61,16 +61,18 @@ public class NnetCustomerDAO {
 		}
 	}
 	
-	public static void buyMedia(String cusId, int cusMoney, int mcode) throws FileNotFoundException {
+	public static void buyMedia(String cusId, int mcode) throws FileNotFoundException {
 		if(!isExist(cusId)){
 			new FileNotFoundException();
 		}
 		SqlSession session = DAOFactory.getSqlSession(true);
-		CustomerDTO customer = new CustomerDTO(cusId, cusMoney, mcode);
+		CustomerDTO customer = null;
+		int price;
 		try {
+			price = NnetMediaDAO.getMedia(mcode).getMprice();
+			customer = new CustomerDTO(cusId, price, mcode);
 			session.update("CustomerXml.buyMedia", customer);
-			customer = session.selectOne("CustomerXml.selectCustomerByCusId", cusId);
-			NnetMediaDAO.sellMedia(customer.getMcode());
+			NnetMediaDAO.sellMedia(mcode);			
 		} finally{
 			DAOFactory.closeSqlSession(false, session);
 		}

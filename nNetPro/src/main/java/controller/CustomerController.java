@@ -56,9 +56,9 @@ public class CustomerController {
 		}
 	}
 	
-	public static void buyMedia (String cusId, int cusMoney, int mcode) {
+	public static void buyMedia (String cusId, int mcode) {
 		try {
-			cust.buyMedia(cusId, cusMoney, mcode);
+			cust.buyMedia(cusId, mcode);
 			SuccessView.successMsg("구매 완료");
 		} catch (FileNotFoundException f){
 			FailView.failMsg("음원이 존재하지 않습니다.");
